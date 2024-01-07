@@ -33,7 +33,7 @@ const start = async () => {
     new OrderCreatedListener( natsWrapper.client ).listen();
     new OrderCancelledListener( natsWrapper.client ).listen();
 
-    // Mongoose connection to MongoDB
+    // Mongoose connection to MongoDb
     await mongoose.connect( process.env.MONGO_URI );
     console.log( 'Connected to MongoDb!' );
   } catch ( error ) {
