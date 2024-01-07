@@ -1,0 +1,15 @@
+import { requireAuth } from '@aspianet/ticketing-common-package';
+import express, { Request, Response } from 'express';
+import { Order } from '../models/order';
+
+const router = express.Router();
+
+router.get( '/api/orders', requireAuth, async ( req: Request, res: Response ) => {
+  const orders = await Order.find( {
+    userId: req.currentUser!.id
+  } ).populate( 'ticket' ).sort( { expiresAt: -1 } );
+
+  res.send( orders );
+} );
+
+export { router as indexOrderRouter };
